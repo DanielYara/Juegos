@@ -56,6 +56,7 @@ public class Board extends JPanel implements MouseListener{
     //Se llama cuando se oprime y se suelta un botón en el mouse
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println("Click Mouse");
          Point mp = e.getPoint();
          if(getBounds().contains(mp)){
              try {

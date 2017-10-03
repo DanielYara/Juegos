@@ -8,15 +8,18 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-public class Board extends JPanel implements ActionListener{
+public class Board extends JPanel implements ActionListener, MouseListener{
     private int xref;
     private int xref2;
     private int yref;
@@ -32,6 +35,7 @@ public class Board extends JPanel implements ActionListener{
       this.numImagen = 0;
       this.timer = new Timer(25, this);
       this.timer.start();
+      this.addMouseListener(this);
     }
     @Override
     public void paintComponent(Graphics g) {
@@ -57,7 +61,7 @@ public class Board extends JPanel implements ActionListener{
         Rectangle oval = new Rectangle(this.xref2+1200, 40, 20, 20);
         
         Image gato = loadImage("cats.gif");
-        g.drawImage(gato, this.xGato, 100, (this.xGato+132), (100+80), (this.numImagen*132), 0, (this.numImagen*132) + 132, 80, this);
+        g.drawImage(gato, this.xGato, 350, (this.xGato+132), (350+80), (this.numImagen*132), 0, (this.numImagen*132) + 132, 80, this);
         
         
         if(carro.intersects(oval)){
@@ -87,7 +91,33 @@ public class Board extends JPanel implements ActionListener{
         return image;
     }
 
-   
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Point mp = e.getPoint();
+        Rectangle cat = new Rectangle(this.xGato, 350, (this.xGato+132), (350+80));
+        if(cat.contains(mp))
+            this.timer.stop();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
 
     
 }
